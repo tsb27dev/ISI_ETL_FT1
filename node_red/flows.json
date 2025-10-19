@@ -1,0 +1,210 @@
+[
+    {
+        "id": "c4e50b3e0acdf272",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "81fac190ff756b5b",
+        "type": "inject",
+        "z": "c4e50b3e0acdf272",
+        "name": "Vendas por categoria",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "SELECT TRIM(p.category) AS categoria, SUM(f.total_eur) AS total_eur FROM fct_order f JOIN dim_product p ON p.product_id = f.product_id GROUP BY TRIM(p.category) ORDER BY total_eur DESC;",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "09949dd08da85e4b"
+            ]
+        ]
+    },
+    {
+        "id": "09949dd08da85e4b",
+        "type": "sqlite",
+        "z": "c4e50b3e0acdf272",
+        "mydb": "8743445ff4eda9b0",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "ecommerce",
+        "x": 430,
+        "y": 80,
+        "wires": [
+            [
+                "f67a22bfcf3ace7f",
+                "a213508ac3a521f0"
+            ]
+        ]
+    },
+    {
+        "id": "f67a22bfcf3ace7f",
+        "type": "debug",
+        "z": "c4e50b3e0acdf272",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "734577c027fb25a8",
+        "type": "ui_chart",
+        "z": "c4e50b3e0acdf272",
+        "name": "",
+        "group": "56450163d84c7ec4",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "ETL Dashboard",
+        "chartType": "bar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "msg.topic",
+        "ymax": "msg.payload",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 880,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a213508ac3a521f0",
+        "type": "function",
+        "z": "c4e50b3e0acdf272",
+        "name": "function 1",
+        "func": "// Converter o array de resultados do SQLite em mensagens individuais\nconst out = [];\nfor (const row of msg.payload) {\n    out.push({\n        topic: row.categoria.trim(),     // rótulo do eixo X\n        payload: Number(row.total_eur)   // valor numérico do eixo Y\n    });\n}\nreturn [out];\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 220,
+        "wires": [
+            [
+                "734577c027fb25a8",
+                "2c1ee52112eb50e9"
+            ]
+        ]
+    },
+    {
+        "id": "2c1ee52112eb50e9",
+        "type": "ui_chart",
+        "z": "c4e50b3e0acdf272",
+        "name": "",
+        "group": "56450163d84c7ec4",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "chart",
+        "chartType": "pie",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 870,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8743445ff4eda9b0",
+        "type": "sqlitedb",
+        "db": "C:\\GIT\\ISI_ETL_FT1\\db\\ecommerce.db",
+        "mode": "RWC"
+    },
+    {
+        "id": "56450163d84c7ec4",
+        "type": "ui_group",
+        "name": "Vendas por Categoria",
+        "tab": "cf94ca8ecfe2f949",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "cf94ca8ecfe2f949",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d0395eb6d803c65c",
+        "type": "global-config",
+        "env": [],
+        "modules": {
+            "node-red-node-sqlite": "1.1.1",
+            "node-red-dashboard": "3.6.6"
+        }
+    }
+]
