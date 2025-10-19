@@ -1,0 +1,5 @@
+<products>
+  <product id="P1"><name>T-shirt Azul</name><category>Apparel &amp; T-Shirts</category><price_eur>19.99</price_eur></product>
+  <product id="P2"><name>Garrafa 500ml</name><category>Home &amp; Kitchen &gt; Bottles</category><price_eur>11.00</price_eur></product>
+  <product id="P3"><name>Meias</name><category>Apparel &amp; Socks</category><price_eur>5.00</price_eur></product>
+</products>

@@ -1,0 +1,4 @@
+produtoId;nomeProduto;categoria;preco
+P1;T-shirt Azul;Apparel & T-Shirts;19.99
+P2;Garrafa 500ml;Home & Kitchen > Bottles;11.00
+P3;Meias;Apparel & Socks;5.00

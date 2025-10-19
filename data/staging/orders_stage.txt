@@ -1,0 +1,4 @@
+ordemId;ordemTs;clienteId;produtoId;quantidade;precoUnidade;moeda
+O1;2025-09-01T10:21:00Z;C1;P1;2;19.99;EUR
+O2;2025-09-02T15:00:00Z;C2;P2;1;12.5;USD
+O3;2025-09-03T09:30:00Z;C1;P3;3;5;EUR

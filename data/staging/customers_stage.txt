@@ -1,0 +1,3 @@
+clienteId;nomeCompleto;email;telemovel;pais
+C1;Ana Maria Silva;ana.silva+promo@example.com;(351) 91-234-5678;PT
+C2;João P. Rocha;joao.rocha@example.com;+351912345679;PT

@@ -1,0 +1,4 @@
+[
+  {"customer_id":"C1","full_name":"Ana Maria Silva","email":"ana.silva+promo@example.com","phone":"(351) 91-234-5678","country":"PT"},
+  {"customer_id":"C2","full_name":"João P. Rocha","email":"joao.rocha@example.com","phone":"+351912345679","country":"PT"}
+]
